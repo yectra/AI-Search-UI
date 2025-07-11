@@ -1,0 +1,669 @@
+{
+  "LocalizedStrings": [
+    {
+      "ElementType": "ClaimType",
+      "ElementId": "countryCode",
+      "StringId": "DisplayName",
+      "Override": false,
+      "Value": "Country"
+    },
+    {
+      "ElementType": "ClaimType",
+      "ElementId": "nationalNumber",
+      "StringId": "DisplayName",
+      "Override": false,
+      "Value": "Phone Number"
+    },
+    {
+      "ElementType": "ClaimType",
+      "ElementId": "nationalNumber",
+      "StringId": "UserHelpText",
+      "Override": false,
+      "Value": "Enter National Phone Number"
+    },
+    {
+      "ElementType": "ClaimType",
+      "ElementId": "phoneVerificationCode",
+      "StringId": "DisplayName",
+      "Override": false,
+      "Value": "Phone Verification Code"
+    },
+    {
+      "ElementType": "ClaimType",
+      "ElementId": "phoneVerificationCode",
+      "StringId": "UserHelpText",
+      "Override": false,
+      "Value": "Enter your SMS verification code received in the email."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "DisplayName",
+      "Override": false,
+      "Value": "Help us beat the bots"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "api_error",
+      "Override": false,
+      "Value": "Api error on captcha control"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_already_verified",
+      "Override": false,
+      "Value": "The challenge has already been verified."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_badstatus",
+      "Override": false,
+      "Value": "Challenge API returned a bad status code. Try again later."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_bypass",
+      "Override": false,
+      "Value": "Allowing challenge bypass."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_exceeded_fetch",
+      "Override": false,
+      "Value": "You have exceeded the number of challenge refreshes allowed."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_exceeded_verify",
+      "Override": false,
+      "Value": "You have exceeded the number of challenge verifications allowed."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_internal_error",
+      "Override": false,
+      "Value": "The challenge service has encountered an internal error, please try again later."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_missing_data",
+      "Override": false,
+      "Value": "The CAPTCHA challenge is missing required data elements."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_no_claims",
+      "Override": false,
+      "Value": "There are no provided claims for this CAPTCHA session."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_no_session",
+      "Override": false,
+      "Value": "The challenge session does not exist. Try starting a new challenge session."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_operation_error",
+      "Override": false,
+      "Value": "This CAPTCHA operation is not supported."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_pattern",
+      "Override": false,
+      "Value": "^[a-zA-Z]{2,10}$"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_patternerror",
+      "Override": false,
+      "Value": "Please enter a valid 2 to 10 character captcha."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_resolved",
+      "Override": false,
+      "Value": "Success!"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captcha_wrong_answer",
+      "Override": false,
+      "Value": "Challenge not successfully solved."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captchatype_audio_help",
+      "Override": false,
+      "Value": "Enter the words you hear in any order"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captchatype_audio_title",
+      "Override": false,
+      "Value": "Press audio button to play the challenge"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "captchatype_visual_help",
+      "Override": false,
+      "Value": "Enter the characters you see"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "charsnotmatched_error",
+      "Override": false,
+      "Value": "The characters didn't match for captcha challenge. Please try again"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "newCaptcha_arialabel",
+      "Override": false,
+      "Value": "Create new captcha"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "nochallengesession_error",
+      "Override": false,
+      "Value": "We could not find a session for the requested challenge ID"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "captchaControlChallengeCode",
+      "StringId": "switchCaptchaType_title",
+      "Override": false,
+      "Value": "Switch captcha type to {0}"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "emailVerificationControl",
+      "StringId": "but_change_claims",
+      "Override": false,
+      "Value": "Change e-mail"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "emailVerificationControl",
+      "StringId": "but_send_code",
+      "Override": false,
+      "Value": "Send verification code"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "emailVerificationControl",
+      "StringId": "but_send_new_code",
+      "Override": false,
+      "Value": "Send new code"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "emailVerificationControl",
+      "StringId": "but_verify_code",
+      "Override": false,
+      "Value": "Verify code"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "emailVerificationControl",
+      "StringId": "failure_send_code_msg",
+      "Override": false,
+      "Value": "We are having trouble verifying your email address. Please enter a valid email address and try again."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "emailVerificationControl",
+      "StringId": "failure_verify_code_msg",
+      "Override": false,
+      "Value": "We are having trouble verifying your email address. Please try again."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "emailVerificationControl",
+      "StringId": "intro_msg",
+      "Override": false,
+      "Value": "Verification is necessary. Please click Send button."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "emailVerificationControl",
+      "StringId": "success_send_code_msg",
+      "Override": false,
+      "Value": "Verification code has been sent to your inbox. Please copy it to the input box below."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "emailVerificationControl",
+      "StringId": "success_verify_code_msg",
+      "Override": false,
+      "Value": "E-mail address verified. You can continue now."
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "phoneVerificationControl",
+      "StringId": "but_change_claims",
+      "Override": false,
+      "Value": "Change Phone Number"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "phoneVerificationControl",
+      "StringId": "but_send_code",
+      "Override": false,
+      "Value": "Send verification code"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "phoneVerificationControl",
+      "StringId": "but_send_new_code",
+      "Override": false,
+      "Value": "Send new code"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "phoneVerificationControl",
+      "StringId": "but_verify_code",
+      "Override": false,
+      "Value": "Verify code"
+    },
+    {
+      "ElementType": "DisplayControl",
+      "ElementId": "phoneVerificationControl",
+      "StringId": "success_send_code_msg",
+      "Override": false,
+      "Value": "Verification code has been sent to your Phone number. Please copy it to the input box below."
+    },
+    {
+      "ElementType": "ErrorMessage",
+      "ElementId": null,
+      "StringId": "AADRequestsThrottled",
+      "Override": false,
+      "Value": "There are too many requests at this moment. Please wait for some time and try again."
+    },
+    {
+      "ElementType": "ErrorMessage",
+      "ElementId": null,
+      "StringId": "ServiceThrottled",
+      "Override": false,
+      "Value": "There are too many requests at this moment. Please wait for some time and try again."
+    },
+    {
+      "ElementType": "ErrorMessage",
+      "ElementId": null,
+      "StringId": "UserMessageIfChallengeExpired",
+      "Override": false,
+      "Value": "That code is expired. Please request a new code."
+    },
+    {
+      "ElementType": "ErrorMessage",
+      "ElementId": null,
+      "StringId": "UserMessageIfCouldntSendSms",
+      "Override": false,
+      "Value": "Cannot send SMS to the phone, please try another phone number."
+    },
+    {
+      "ElementType": "ErrorMessage",
+      "ElementId": null,
+      "StringId": "UserMessageIfInternalError",
+      "Override": false,
+      "Value": "We are having trouble verifying your email address. Please enter a valid email address and try again."
+    },
+    {
+      "ElementType": "ErrorMessage",
+      "ElementId": null,
+      "StringId": "UserMessageIfInvalidFormat",
+      "Override": false,
+      "Value": "Your phone number is not in a valid format, please correct it and try again."
+    },
+    {
+      "ElementType": "ErrorMessage",
+      "ElementId": null,
+      "StringId": "UserMessageIfMaxAllowedCodeRetryReached",
+      "Override": false,
+      "Value": "Wrong code entered too many times, please try again later."
+    },
+    {
+      "ElementType": "ErrorMessage",
+      "ElementId": null,
+      "StringId": "UserMessageIfServerError",
+      "Override": false,
+      "Value": "Cannot use MFA service, please try again later."
+    },
+    {
+      "ElementType": "ErrorMessage",
+      "ElementId": null,
+      "StringId": "UserMessageIfThrottled",
+      "Override": false,
+      "Value": "There have been too many requests to verify this email address. Please wait a while, then try again."
+    },
+    {
+      "ElementType": "ErrorMessage",
+      "ElementId": null,
+      "StringId": "UserMessageIfVerificationFailedNoRetry",
+      "Override": false,
+      "Value": "You've made too many incorrect attempts. Please try again later."
+    },
+    {
+      "ElementType": "ErrorMessage",
+      "ElementId": null,
+      "StringId": "UserMessageIfVerificationFailedRetryAllowed",
+      "Override": false,
+      "Value": "The verification code you have entered does not match our records. Please try again, or request a new code."
+    },
+    {
+      "ElementType": "ErrorMessage",
+      "ElementId": null,
+      "StringId": "UserMessageIfWrongCodeEntered",
+      "Override": false,
+      "Value": "Wrong code entered, please try again."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "alert_message",
+      "Override": false,
+      "Value": "Are you sure that you want to cancel entering your details?"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "alert_no",
+      "Override": false,
+      "Value": "No"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "alert_title",
+      "Override": false,
+      "Value": "Cancel Entering Your Details"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "alert_yes",
+      "Override": false,
+      "Value": "Yes"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "button_cancel",
+      "Override": false,
+      "Value": "Cancel"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "button_continue",
+      "Override": false,
+      "Value": "Continue"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "cancel_message",
+      "Override": false,
+      "Value": "The user has cancelled entering self-asserted information"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "day",
+      "Override": false,
+      "Value": "Day"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "disclaimer_link_1_text",
+      "Override": false,
+      "Value": "Privacy Statement"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "disclaimer_link_1_url",
+      "Override": true,
+      "Value": "https://www.bricknmortar.in"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "disclaimer_link_2_text",
+      "Override": false,
+      "Value": "Terms and Conditions"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "disclaimer_link_2_url",
+      "Override": true,
+      "Value": "https://www.bricknmortar.in"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "disclaimer_msg_intro",
+      "Override": false,
+      "Value": "By providing your phone number, you consent to receiving a one-time passcode sent by text message to help you sign into 'Brick N Mortar'. Standard messsage and data rates may apply."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "error_fieldIncorrect",
+      "Override": false,
+      "Value": "One or more fields are filled out incorrectly. Please check your entries and try again."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "error_passwordEntryMismatch",
+      "Override": false,
+      "Value": "The password entry fields do not match. Please enter the same password in both fields and try again."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "error_requiredFieldMissing",
+      "Override": false,
+      "Value": "A required field is missing. Please fill out all required fields and try again."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "heading",
+      "Override": false,
+      "Value": "Sign up"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "helplink_text",
+      "Override": false,
+      "Value": "What is this?"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "initial_intro",
+      "Override": false,
+      "Value": "Please verify your country code and phone number"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "month",
+      "Override": false,
+      "Value": "Month"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "months",
+      "Override": false,
+      "Value": "January, February, March, April, May, June, July, August, September, October, November, December"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "preloader_alt",
+      "Override": false,
+      "Value": "Please wait"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "required_field",
+      "Override": false,
+      "Value": "This information is required."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_but_default",
+      "Override": false,
+      "Value": "Default"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_but_edit",
+      "Override": false,
+      "Value": "Change e-mail"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_but_resend",
+      "Override": false,
+      "Value": "Send new code"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_but_send",
+      "Override": false,
+      "Value": "Send verification code"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_but_verify",
+      "Override": false,
+      "Value": "Verify code"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_fail_code_expired",
+      "Override": false,
+      "Value": "That code is expired. Please request a new code."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_fail_no_retry",
+      "Override": false,
+      "Value": "You've made too many incorrect attempts. Please try again later."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_fail_retry",
+      "Override": false,
+      "Value": "That code is incorrect. Please try again."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_fail_server",
+      "Override": false,
+      "Value": "We are having trouble verifying your email address. Please enter a valid email address and try again."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_fail_throttled",
+      "Override": false,
+      "Value": "There have been too many requests to verify this email address. Please wait a while, then try again."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_incorrect_format",
+      "Override": false,
+      "Value": "Incorrect format."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_info_msg",
+      "Override": false,
+      "Value": "Verification code has been sent to your inbox. Please copy it to the input box below."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_input",
+      "Override": false,
+      "Value": "Verification code"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_intro_msg",
+      "Override": false,
+      "Value": "Verification is necessary. Please click Send button."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_sent",
+      "Override": false,
+      "Value": "Verification code has been sent to:"
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "ver_success_msg",
+      "Override": false,
+      "Value": "E-mail address verified. You can now continue."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "verifying_blurb",
+      "Override": false,
+      "Value": "Please wait while we process your information."
+    },
+    {
+      "ElementType": "UxElement",
+      "ElementId": null,
+      "StringId": "year",
+      "Override": false,
+      "Value": "Year"
+    }
+  ]
+}

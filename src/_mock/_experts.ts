@@ -1,0 +1,66 @@
+export const askExperts = [
+  {
+    id: 1,
+    name: 'Elumperiyar',
+    role: ['Architect for Buildings', 'Landscaping'],
+    avatarUrl: 'https://api-dev-minimal-v6.vercel.app/assets/images/portrait/portrait-1.webp',
+    description: 'Architect for Buildings & Landscaping with 22 Yrs Experience.',
+  },
+  {
+    id: 2,
+    name: 'Rajalakshmi',
+    role: ['Interior Design', 'PMC'],
+    avatarUrl: 'https://api-dev-minimal-v6.vercel.app/assets/images/portrait/portrait-1.webp',
+    description: 'Expert in Interior Design & PMC with 21 Yrs experience.',
+  },
+  {
+    id: 3,
+    name: 'Jegan Jeyaseelan',
+    role: [' Water proofing', 'Painting'],
+    avatarUrl: 'https://api-dev-minimal-v6.vercel.app/assets/images/portrait/portrait-1.webp',
+    description: 'Expert in Water proofing & Painting with 22 Yrs experience.',
+  },
+  {
+    id: 4,
+    name: 'Narayanan E',
+    role: ['Air conditioning'],
+    avatarUrl: 'https://api-dev-minimal-v6.vercel.app/assets/images/portrait/portrait-1.webp',
+    description: 'Expert in Air conditioning with 30 Yrs experience',
+  },
+  {
+    id: 5,
+    name: 'Annamalai V R',
+    role: ['Home Automation'],
+    avatarUrl: 'https://api-dev-minimal-v6.vercel.app/assets/images/portrait/portrait-1.webp',
+    description: 'Expert in Home Automation with 22 Yrs experience.',
+  },
+
+  {
+    id: 6,
+    name: 'Cyril Madhavan',
+    role: ['Electrical', ' DGS'],
+    avatarUrl: 'https://api-dev-minimal-v6.vercel.app/assets/images/portrait/portrait-1.webp',
+    description: 'Expert in Electrical & DGS.',
+  },
+  {
+    id: 7,
+    name: 'Sajeev Hariharan',
+    role: ['CCTV', 'Security Systems'],
+    avatarUrl: 'https://api-dev-minimal-v6.vercel.app/assets/images/portrait/portrait-1.webp',
+    description: 'Expert in CCTV & Security Systems.',
+  },
+  {
+    id: 8,
+    name: 'Chandra',
+    role: ['RO', 'STP', 'WTP'],
+    avatarUrl: 'https://api-dev-minimal-v6.vercel.app/assets/images/portrait/portrait-1.webp',
+    description: 'Expert in RO , STP & WTP with 20 Yrs experience.',
+  },
+  {
+    id: 9,
+    name: 'Purushothaman ',
+    role: ['Solar'],
+    avatarUrl: 'https://api-dev-minimal-v6.vercel.app/assets/images/portrait/portrait-1.webp',
+    description: 'Expert in Solar with 20 Yrs experience.',
+  },
+];

@@ -2,8 +2,8 @@ import type { SettingsState } from 'src/components/settings';
 import type { NavSectionProps } from 'src/components/nav-section';
 import type { Theme, SxProps, CSSObject, Breakpoint } from '@mui/material/styles';
 
-import { useMemo } from 'react';
-import { useIsAuthenticated } from '@azure/msal-react';
+import { getCurrentUser } from 'aws-amplify/auth';
+import { useMemo, useState, useEffect } from 'react';
 
 import Alert from '@mui/material/Alert';
 import { useTheme } from '@mui/material/styles';
@@ -46,17 +46,28 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
 
   const navColorVars = useNavColorVars(theme, settings);
 
-  const isAuthenticated = useIsAuthenticated();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const layoutQuery: Breakpoint = 'lg';
-
-  console.log('layout', navData);
 
   const isNavMini = settings.navLayout === 'mini';
 
   const isNavHorizontal = settings.navLayout === 'horizontal';
 
   const isNavVertical = isNavMini || settings.navLayout === 'vertical';
+
+useEffect(() => {
+  const checkUser = async () => {
+    try {
+      await getCurrentUser();
+      setIsAuthenticated(true);
+    } catch {
+      setIsAuthenticated(false);
+    }
+  };
+
+  checkUser();
+}, []);
 
   return (
     <>

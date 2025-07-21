@@ -1,10 +1,9 @@
-import { InteractionStatus } from '@azure/msal-browser';
+import { Hub } from 'aws-amplify/utils';
+import { useNavigate } from 'react-router';
 import React, { useRef, useState, useEffect } from 'react';
-import { useMsal, useIsAuthenticated } from '@azure/msal-react';
+import { getCurrentUser, signInWithRedirect } from 'aws-amplify/auth';
 
 import { SplashScreen } from 'src/components/loading-screen';
-
-import { b2cPolicies, loginRequest } from '../authConfig';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -12,66 +11,58 @@ interface ProtectedRouteProps {
 
 const AdminProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const hasRedirected = useRef<boolean>(false); // Prevent multiple redirects
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const hasRedirected = useRef(false); // ✅ Prevents multiple redirects
 
-  const { inProgress, accounts, instance } = useMsal();
-  const isAuthenticated = useIsAuthenticated();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchToken = async () => {
-      if (
-        inProgress === InteractionStatus.Startup ||
-        inProgress === InteractionStatus.HandleRedirect
-      ) {
-        return; // Avoid processing during startup or redirect handling
-      }
+    const checkAuth = async () => {
+      try {
+        await getCurrentUser(); // ✅ succeeds if logged in
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.error('User not authenticated:', error);
 
-      if (!isAuthenticated) {
-        // Avoid multiple login redirects
-        if (inProgress === InteractionStatus.None && !hasRedirected.current) {
+        // 🔁 Redirect to Cognito Hosted UI (only once)
+        if (!hasRedirected.current) {
           hasRedirected.current = true;
-          instance.loginRedirect({
-            scopes: loginRequest.scopes,
-            prompt: loginRequest.prompt,
-            authority: b2cPolicies.authorities.admin.authority,
-            redirectUri: '/',
-          });
+          await signInWithRedirect();
         }
-        return;
+      } finally {
+        setIsLoading(false);
       }
-
-      if (accounts.length > 0 && inProgress === InteractionStatus.None) {
-        try {
-          await instance.acquireTokenSilent({
-            account: accounts[0],
-            scopes: loginRequest.scopes,
-            prompt: loginRequest.prompt,
-            authority: b2cPolicies.authorities.admin.authority,
-          });
-        } catch (error) {
-          if (inProgress === InteractionStatus.None && !hasRedirected.current) {
-            hasRedirected.current = true;
-            instance.loginRedirect({
-              scopes: loginRequest.scopes,
-              prompt: loginRequest.prompt,
-              authority: b2cPolicies.authorities.admin.authority,
-              redirectUri: '/',
-            });
-          }
-        }
-      }
-      setIsLoading(false);
     };
 
-    fetchToken();
-  }, [accounts, inProgress, isAuthenticated, instance]);
+    checkAuth();
 
-  // Show loading until all checks are complete
-  if (isLoading || inProgress !== InteractionStatus.None) {
+    const listener = (data: any) => {
+      switch (data.payload.event) {
+        case 'signIn':
+          setIsAuthenticated(true);
+          setIsLoading(false);
+          break;
+        case 'signOut':
+          setIsAuthenticated(false);
+          navigate('/');
+          break;
+        default:
+          console.log(`Unhandled auth event: ${data.payload.event}`);
+      }
+    };
+
+    const unsubscribe = Hub.listen('auth', listener);
+
+    return () => {
+      unsubscribe();
+    };
+  }, [navigate]);
+
+  if (isLoading) {
     return <SplashScreen />;
   }
 
-  return <>{children}</>;
+  return <>{isAuthenticated ? children : null}</>;
 };
 
 export default AdminProtectedRoute;

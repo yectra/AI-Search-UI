@@ -11,16 +11,15 @@ import {
 } from '@mui/material';
 import { Timeline, TimelineDot, TimelineItem, TimelineContent, TimelineSeparator, TimelineConnector } from '@mui/lab';
 
-const stepsData = [
-  { label: 'Import Data', icon: 'mdi:database' },
-  { label: 'Select Data to Display' },
-  { label: 'Searchable Attributes' },
-  { label: 'Configure Relevancy' },
-  { label: 'Implement Search', icon: 'mdi:cog-outline' },
-];
-
 export function GetStartedPage() {
   const [activeStep, setActiveStep] = useState(0);
+  const stepsData = [
+    { label: 'Import Data', icon: 'mdi:database' },
+    { label: 'Select Data to Display', icon: 'mdi:magnify' },
+    { label: 'Searchable Attributes', icon: 'mdi:pencil' },
+    { label: 'Configure Relevancy', icon: 'material-symbols:bolt-outline-rounded' },
+    { label: 'Implement Search', icon: 'mdi:cog' },
+  ];
 
   const handleCardClick = () => {
     if (activeStep < stepsData.length - 1) {
@@ -38,11 +37,15 @@ export function GetStartedPage() {
             const isActive = index === activeStep;
 
             return (
-              <TimelineItem key={step.label}>
+              <TimelineItem key={step.label} sx={{
+                '&::before': {
+                  display: 'none',
+                },
+              }}>
                 <TimelineSeparator>
                   <TimelineDot
                     sx={{
-                      bgcolor: isCompleted ? '#4caf50' : isActive ? 'transparent' : 'transparent',
+                      bgcolor: isCompleted ? '#4caf50' : isActive ? 'black' : 'transparent',
                       borderColor: isCompleted ? '#4caf50' : '#ccc',
                     }}
                   >
@@ -53,7 +56,7 @@ export function GetStartedPage() {
                         icon={step.icon || 'mdi:circle-outline'}
                         width="20"
                         height="20"
-                        color={isActive ? '#000' : '#ccc'}
+                        color={isActive ? '#fff' : '#ccc'}
                       />
                     )}
                   </TimelineDot>

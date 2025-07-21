@@ -2,10 +2,6 @@ import 'src/global.css';
 
 // ----------------------------------------------------------------------
 
-import type { PublicClientApplication } from '@azure/msal-browser';
-
-import { MsalProvider } from '@azure/msal-react';
-
 import { Router } from 'src/routes/sections';
 
 import { useScrollToTop } from 'src/hooks/use-scroll-to-top';
@@ -21,17 +17,12 @@ import { SettingsDrawer, defaultSettings, SettingsProvider } from 'src/component
 
 // ----------------------------------------------------------------------
 
-interface MsalInstance {
-  instance: PublicClientApplication;
-}
-
-export default function App({ instance }: MsalInstance) {
+export default function App() {
   useScrollToTop();
 
   return (
     <I18nProvider>
       <LocalizationProvider>
-        <MsalProvider instance={instance}>
           <SettingsProvider settings={defaultSettings}>
             <ThemeProvider>
               <MotionLazy>
@@ -42,7 +33,6 @@ export default function App({ instance }: MsalInstance) {
               </MotionLazy>
             </ThemeProvider>
           </SettingsProvider>
-        </MsalProvider>
       </LocalizationProvider>
     </I18nProvider>
   );

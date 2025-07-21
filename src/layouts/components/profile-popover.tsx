@@ -1,4 +1,3 @@
-import { useMsal } from '@azure/msal-react';
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,8 +15,6 @@ import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
 import { AnimateAvatar } from 'src/components/animate';
 
-import { b2cPolicies } from 'src/auth/authConfig';
-
 import { AccountButton } from './account-button';
 
 // ----------------------------------------------------------------------
@@ -27,14 +24,6 @@ export function ProfilePopover() {
 
   const navigate = useNavigate();
 
-  const { instance, accounts } = useMsal();
-
-  const azureSignout = () => {
-    instance.logoutRedirect({
-      authority: b2cPolicies.authorities.admin.authority,
-      postLogoutRedirectUri: '/',
-    });
-  };
 
   const [drawer, setDrawer] = useState(false);
 
@@ -55,7 +44,7 @@ export function ProfilePopover() {
     <AnimateAvatar
       width={96}
       slotProps={{
-        avatar: { src: accounts[0]?.name, alt: accounts[0]?.name },
+        avatar: { src: '', alt: '' },
         overlay: {
           border: 2,
           spacing: 3,
@@ -63,7 +52,7 @@ export function ProfilePopover() {
         },
       }}
     >
-      {accounts[0]?.username.charAt(0).toUpperCase()}
+      name
     </AnimateAvatar>
   );
 
@@ -72,8 +61,8 @@ export function ProfilePopover() {
       <AccountButton
         open={drawer}
         onClick={handleOpenDrawer}
-        photoURL={accounts[0]?.name as string}
-        displayName={accounts[0]?.name as string}
+        photoURL=''
+        displayName=''
       />
 
       <Drawer
@@ -93,7 +82,7 @@ export function ProfilePopover() {
           <Stack alignItems="center" sx={{ pt: 8, pb: 3 }}>
             {renderAvatar}
             <Typography variant="subtitle1" noWrap sx={{ mt: 2 }}>
-              {accounts[0]?.name}
+               name
             </Typography>
           </Stack>
           <Stack
@@ -136,7 +125,7 @@ export function ProfilePopover() {
           </Stack>
         </Scrollbar>
         <Box sx={{ p: 2.5 }}>
-          <Button fullWidth variant="soft" size="large" color="error" onClick={azureSignout}>
+          <Button fullWidth variant="soft" size="large" color="error">
             Logout
           </Button>
         </Box>

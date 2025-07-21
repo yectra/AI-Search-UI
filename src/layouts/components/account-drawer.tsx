@@ -1,8 +1,8 @@
 import type { UserType } from 'src/auth/types';
 import type { IconButtonProps } from '@mui/material/IconButton';
 
-import { useMsal } from '@azure/msal-react';
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { decodeJWT, fetchAuthSession } from 'aws-amplify/auth';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -12,7 +12,6 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
 import { varAlpha } from 'src/theme/styles';
-import { useGetBusiness } from 'src/actions/roos-admin/home';
 
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
@@ -53,12 +52,25 @@ export function AccountDrawer({ data = [], sx, user, ...other }: AccountDrawerPr
   const theme = useTheme();
 
   const [open, setOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState<any>(null);
 
-  const { accounts } = useMsal();
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const session = await fetchAuthSession();
+        const idToken = session.tokens?.idToken?.toString();
 
-  const name = accounts[0]?.idTokenClaims?.given_name as string;
+        if (idToken) {
+          const decoded = decodeJWT(idToken);
+          setUserInfo(decoded);    
+        }       
+      } catch (err) {
+        console.error('Error fetching user:', err);
+      }
+    };
 
-  const { business } = useGetBusiness(accounts[0]?.localAccountId);
+    fetchUser();
+  }, []);
 
   const handleOpenDrawer = useCallback(() => {
     setOpen(true);
@@ -72,10 +84,10 @@ export function AccountDrawer({ data = [], sx, user, ...other }: AccountDrawerPr
     <AnimateAvatar
       width={96}
       slotProps={{
-        avatar: {
-          src: business?.restaurantLogo,
-          alt: name,
-        },
+        // avatar: {
+        //   src: business?.restaurantLogo,
+        //   alt: name,
+        // },
         overlay: {
           border: 2,
           spacing: 3,
@@ -83,18 +95,18 @@ export function AccountDrawer({ data = [], sx, user, ...other }: AccountDrawerPr
         },
       }}
     >
-      {name.charAt(0).toUpperCase()}
+      {userInfo?.payload.email.charAt(0).toUpperCase()}
     </AnimateAvatar>
   );
 
   return (
     <>
-     <Typography variant="subtitle2" sx={{mx:2}}>{name}</Typography>
+      {/* <Typography variant="subtitle2" sx={{mx:2}}>{userInfo.username}</Typography> */}
       <AccountButton
         open={open}
         onClick={handleOpenDrawer}
-        photoURL={business?.restaurantLogo || name}
-        displayName={name}
+        photoURL=''
+        displayName={userInfo?.payload.email}
         sx={sx}
         {...other}
       />
@@ -118,13 +130,11 @@ export function AccountDrawer({ data = [], sx, user, ...other }: AccountDrawerPr
             {renderAvatar}
 
             <Typography variant="subtitle1" noWrap sx={{ mt: 2 }}>
-              {accounts[0].idTokenClaims?.given_name === 'undefined'
-                ? 'Admin'
-                : String(accounts[0].idTokenClaims?.given_name)}
+              {userInfo?.payload.email}
             </Typography>
 
             <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }} noWrap>
-              {accounts[0].idTokenClaims?.jobTitle as string}
+              {userInfo?.user?.attributes?.jobTitle || ''}
             </Typography>
           </Stack>
         </Scrollbar>

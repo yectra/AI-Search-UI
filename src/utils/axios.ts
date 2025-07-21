@@ -1,17 +1,12 @@
 import type { AxiosRequestConfig } from 'axios';
 
 import axios from 'axios';
-import { PublicClientApplication } from '@azure/msal-browser';
+import { fetchAuthSession } from 'aws-amplify/auth';
 
 import { CONFIG } from 'src/config-global';
 
-import { msalConfig, loginRequest } from 'src/auth/authConfig';
 
 // ----------------------------------------------------------------------
-
-// Create MSAL instance
-const msalInstance = new PublicClientApplication(msalConfig);
-
 // Create axios instance
 const axiosInstance = axios.create({ baseURL: CONFIG.site.serverUrl });
 
@@ -22,21 +17,22 @@ axiosInstance.interceptors.response.use(
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    await msalInstance.initialize();
-    const accounts = msalInstance.getAllAccounts();
-    if (accounts.length > 0) {
-      const request = {
-        scopes: loginRequest.scopes,
-        prompt: loginRequest.prompt,
-        account: accounts[0],
-      };
-      try {
-        const response = await msalInstance.acquireTokenSilent(request);
-        config.headers.Authorization = `Bearer ${response.accessToken}`;
-      } catch (error) {
-        console.error('Error acquiring token silently', error);
+    try {
+      const session = await fetchAuthSession();
+      const accessToken = session.tokens?.accessToken?.toString();
+
+      if (accessToken) {
+        config.headers = config.headers || {};
+        if (typeof config.headers.set === 'function') {
+          config.headers.set('Authorization', `Bearer ${accessToken}`);
+        } else {
+          config.headers.Authorization = `Bearer ${accessToken}`;
+        }
       }
+    } catch (error) {
+      console.error('Error acquiring token silently', error);
     }
+
     return config;
   },
   (error) => Promise.reject(error)

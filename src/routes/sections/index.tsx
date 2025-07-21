@@ -5,7 +5,7 @@ import { DashboardLayout } from 'src/layouts/ai-search';
 
 import { LoadingScreen } from 'src/components/loading-screen';
 
-// import AdminProtectedRoute from 'src/auth/guard/admin-auth-guard';
+import AdminProtectedRoute from 'src/auth/guard/admin-auth-guard';
 
 // ----------------------------------------------------------------------
 // Overview
@@ -26,13 +26,13 @@ export function Router() {
     {
       path: '/',
       element: (
-        // <AdminProtectedRoute>
+        <AdminProtectedRoute>
           <DashboardLayout>
             <Suspense fallback={<LoadingScreen />}>
               <Outlet />
             </Suspense>
           </DashboardLayout>
-        // </AdminProtectedRoute>
+        </AdminProtectedRoute>
       ),
       children: [
         {

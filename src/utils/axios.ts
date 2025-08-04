@@ -97,91 +97,11 @@ export const deleteFetcher = async (args: string | [string, AxiosRequestConfig])
 // ----------------------------------------------------------------------
 
 export const endpoints = {
-   restaruntAdmin: {
-    home: {      
-      business: '/roos-business/business?localAccountId=',     
-    },
-  },
-  auth: {
-    createUser: '/bnm-business/createUser',
-  },
-  client: {
-    joinAsVendor: '/bnm-customer/customer/convert/vendor',
-    services: {
-      getAll: '/bnm-service/service',
-      getById: '/bnm-service/service',
-      locationFilter: '/bnm-service/service',
-    },
-    projects: {
-      getAll: '/bnm-project/project/profile',
-    },
-    serviceForm: {
-      create: '/bnm-serviceform/serviceForm',
-    },
-    quotes: {
-      create: '/bnm-quote/quote',
-    },
-    profile: {
-      customer: {
-        create: '/bnm-customer/customer',
-        getAll: '/bnm-customer/customers',
-        getById: '/bnm-customer/customer',
-        update: '/bnm-customer/customer',
-        delete: '/bnm-customer/customer',
-      },
-      vendor: {
-        create: '/bnm-vendor/vendor',
-        getAll: '/bnm-vendor/vendor',
-        getById: '/bnm-vendor/vendor',
-        update: '/bnm-vendor/vendor',
-        delete: '/bnm-vendor/vendor',
-      },
-    },
-  },
-  admin: {
-    services: {
-      create: '/bnm-service/service',
-      getAll: '/bnm-service/service',
-      getById: '/bnm-service/service',
-      update: '/bnm-service/service',
-      delete: '/bnm-service/service',
-    },
-    projects: {
-      create: '/bnm-project/project',
-      getAll: '/bnm-project/projects',
-      getById: '/bnm-project/project',
-      update: '/bnm-project/project',
-      delete: '/bnm-project/project',
-    },
-    customer: {
-      create: '/bnm-customer/customer',
-      getAll: '/bnm-customer/customers',
-      getById: '/bnm-customer/customer',
-      update: '/bnm-customer/customer',
-      delete: '/bnm-customer/customer',
-    },
-    vendor: {
-      create: '/bnm-vendor/vendor',
-      getAll: '/bnm-vendor/vendor',
-      getById: '/bnm-vendor/vendor',
-      getByPublicUrl: '/bnm-vendor/vendor/profile',
-      update: '/bnm-vendor/vendor',
-      delete: '/bnm-vendor/vendor',
-    },
-    serviceForm: {
-      create: '/bnm-serviceform/serviceForm',
-      getAll: '/bnm-serviceform/serviceForms',
-      getById: '/bnm-serviceform/serviceForm',
-      update: '/bnm-serviceform/serviceForm',
-      delete: '/bnm-serviceform/serviceForm',
-    },
-    quotes: {
-      create: '/bnm-quote/quote',
-      getAll: '/bnm-quote/quotes',
-      getById: '/bnm-quote/quote',
-      update: '/bnm-quote/quote',
-      delete: '/bnm-quote/quote',
-    },
-    uploadImage: '/bnm-service/upload',
+  aiSearch: {
+    getStarted: {
+      upload: 'https://k2rnzovi07.execute-api.us-east-1.amazonaws.com/Prod/api/fileUpload',
+      getAttributes: 'https://k2rnzovi07.execute-api.us-east-1.amazonaws.com/Prod/api/getAttributes?',
+      searchableFields: 'https://k2rnzovi07.execute-api.us-east-1.amazonaws.com/Prod/api/searchableFields'
+    }
   },
 };

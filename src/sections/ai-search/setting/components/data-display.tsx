@@ -72,11 +72,30 @@ export function DataDisplay({
                                 *
                             </Typography>
                         </Typography>
-                        <Tooltip title="Enter the OpenSearch index name where data should be stored or queried" arrow>
+                        <Tooltip
+                            title="Enter the OpenSearch index name where data should be stored or queried"
+                            arrow
+                            componentsProps={{
+                                tooltip: {
+                                    sx: {
+                                        backgroundColor: '#f5f5f5',
+                                        color: '#000',
+                                        fontSize: 13,
+                                        border: '1px solid #ccc',
+                                    },
+                                },
+                                arrow: {
+                                    sx: {
+                                        color: '#f5f5f5',
+                                    },
+                                },
+                            }}
+                        >
                             <IconButton size="small">
                                 <Iconify icon="mdi:information-outline" width={18} />
                             </IconButton>
                         </Tooltip>
+
                     </Box>
                     <TextField
                         required
@@ -99,7 +118,25 @@ export function DataDisplay({
                                 *
                             </Typography>
                         </Typography>
-                        <Tooltip title="Provide the model ID used to generate embeddings for text search" arrow>
+                        <Tooltip
+                            title="Provide the model ID used to generate embeddings for text search"
+                            arrow
+                            componentsProps={{
+                                tooltip: {
+                                    sx: {
+                                        backgroundColor: '#f5f5f5',
+                                        color: '#000',
+                                        fontSize: 13,
+                                        border: '1px solid #ccc',
+                                    },
+                                },
+                                arrow: {
+                                    sx: {
+                                        color: '#f5f5f5',
+                                    },
+                                },
+                            }}
+                        >
                             <IconButton size="small">
                                 <Iconify icon="mdi:information-outline" width={18} />
                             </IconButton>
@@ -132,7 +169,25 @@ export function DataDisplay({
                                 *
                             </Typography>
                         </Typography>
-                        <Tooltip title="Provide the model ID used to generate embeddings for image search" arrow>
+                        <Tooltip
+                            title="Provide the model ID used to generate embeddings for image search"
+                            arrow
+                            componentsProps={{
+                                tooltip: {
+                                    sx: {
+                                        backgroundColor: '#f5f5f5',
+                                        color: '#000',
+                                        fontSize: 13,
+                                        border: '1px solid #ccc',
+                                    },
+                                },
+                                arrow: {
+                                    sx: {
+                                        color: '#f5f5f5',
+                                    },
+                                },
+                            }}
+                        >
                             <IconButton size="small">
                                 <Iconify icon="mdi:information-outline" width={18} />
                             </IconButton>

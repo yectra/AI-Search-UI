@@ -8,6 +8,8 @@ import {
   Card,
   Grid,
   Alert,
+  Stack,
+  Paper,
   Button,
   Snackbar,
   Backdrop,
@@ -22,7 +24,21 @@ import { CONFIG } from 'src/config-global';
 
 import { DataDisplay } from './components/data-display';
 
-export function GetStartedPage() {
+const InfoRow = ({ label, value }: { label: string; value: string }) => (
+  <Box display="flex" alignItems="center" sx={{ mb: 1 }}>
+    <Typography
+      variant="body1" // Use same variant
+      sx={{ fontWeight: 600, minWidth: '130px' }}
+    >
+      {label}
+    </Typography>
+    <Typography variant="body1" color="text.secondary">
+      {value}
+    </Typography>
+  </Box>
+);
+
+export function SettingPage() {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
@@ -33,6 +49,8 @@ export function GetStartedPage() {
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>('success');
+  const [jobId, setJobId] = useState<string>('');
+  const [jobStatus, setJobStatus] = useState<any>();
 
   const [formValues, setFormValues] = useState({
     businessId: '',
@@ -48,7 +66,7 @@ export function GetStartedPage() {
   const stepsData = [
     { label: 'Import Data', icon: 'mdi:database' },
     { label: 'Select Data to Display', icon: 'mdi:magnify' },
-    { label: 'implement search', icon: 'mdi:pencil' },
+    { label: 'Job Status', icon: 'mdi:pencil' },
     { label: 'Configure Relevancy', icon: 'material-symbols:bolt-outline-rounded' },
     { label: 'Implement Search', icon: 'mdi:cog' },
   ];
@@ -98,32 +116,66 @@ export function GetStartedPage() {
       formData.append('businessId', userInfo.payload['cognito:username']);
 
       setIsLoading(true);
+
+      // Upload file to backend
       await postFetcher([
-        endpoints.aiSearch.getStarted.upload,
+        endpoints.aiSearch.settings.upload,
         { data: formData },
-      ]);
+      ]);     
 
-      const params = new URLSearchParams({
-        tableName: 'processedData',
-        businessId: userInfo.payload['cognito:username'],
-      });
-      const attributesResponse = await fetcher([`${endpoints.aiSearch.getStarted.getAttributes}${params}`, {}]);
-      setAttributes(attributesResponse);
-
-      setIsLoading(false);
-      setSnackbarMessage('File uploaded successfully!');
-      setSnackbarSeverity('success');
-      setSnackbarOpen(true);
-      if (activeStep < stepsData.length - 1) {
-        setActiveStep((prev) => prev + 1);
-      }
-    } catch (err) {
+    } catch (uploadError) {
+      console.error('Upload error:', uploadError);
       setIsLoading(false);
       setSnackbarMessage('Failed to upload file.');
       setSnackbarSeverity('error');
       setSnackbarOpen(true);
-      console.error('Upload error:', err);
     }
+
+     const businessId = userInfo.payload['cognito:username'];
+      const pollingInterval = 3000; // 3 seconds
+
+      // Begin polling for attribute readiness
+      const polling = setInterval(async () => {
+        try {
+          const response = await fetcher([`${endpoints.aiSearch.settings.getAttributes}/${businessId}`, {}]);
+
+          if (response.status === "COMPLETED") {
+            console.log("Data is ready:", response);
+            clearInterval(polling);
+
+            // Set attributes in state
+            setAttributes(response.attributes);
+
+            setIsLoading(false);
+            setSnackbarMessage('File uploaded and processed successfully!');
+            setSnackbarSeverity('success');
+            setSnackbarOpen(true);
+
+            // Move to the next step in UI
+            if (activeStep < stepsData.length - 1) {
+              setActiveStep((prev) => prev + 1);
+            }
+
+          } else if (response.status === "UNKNOWN") {
+            console.log("Still processing...");
+            // Continue polling
+          } else {
+            console.warn("Unexpected status or error response:", response);
+            clearInterval(polling);
+            setIsLoading(false);
+            setSnackbarMessage('Error while polling for attributes.');
+            setSnackbarSeverity('error');
+            setSnackbarOpen(true);
+          }
+        } catch (pollingError) {
+          console.error("Polling error:", pollingError);
+          clearInterval(polling);
+          setIsLoading(false);
+          setSnackbarMessage('Polling failed.');
+          setSnackbarSeverity('error');
+          setSnackbarOpen(true);
+        }
+      }, pollingInterval);
   };
 
   const handleChange = (field: string, value: string | string[]) => {
@@ -134,30 +186,55 @@ export function GetStartedPage() {
   };
 
   const handleContinue = async () => {
-    formValues.businessId = userInfo.payload['cognito:username'];
+    const modifiedFormValues = {
+      ...formValues,
+      businessId: userInfo.payload['cognito:username'],
+      openSearchIndexNames: formValues.openSearchIndexNames
+        .split(',')
+        .map((name) => name.trim())
+        .filter((name) => name)
+    };
+
     try {
       setIsLoading(true);
-      const searchableFieldsResponse = await postFetcher([
-        endpoints.aiSearch.getStarted.searchableFields,
-        { data: formValues },
+      const response = await postFetcher([
+        endpoints.aiSearch.settings.searchableFields,
+        { data: modifiedFormValues },
       ]);
-      console.log('searchableFieldsResponse', searchableFieldsResponse)
+      setJobId(response.JobId);
+
+      const jobStatusResponse = await fetcher([`${endpoints.aiSearch.settings.jobStatus}${response.JobId}`, {}]);
+      setJobStatus(jobStatusResponse);
+
       setIsLoading(false);
-      // setSnackbarMessage('File uploaded successfully!');
-      // setSnackbarSeverity('success');
-      // setSnackbarOpen(true);
-      // if (activeStep < stepsData.length - 1) {
-      //   setActiveStep((prev) => prev + 1);
-      // }
+      setSnackbarMessage('Searchable Feilds Data Sent successfully!');
+      setSnackbarSeverity('success');
+      setSnackbarOpen(true);
+      if (activeStep < stepsData.length - 1) {
+        setActiveStep((prev) => prev + 1);
+      }
     } catch (err) {
       setIsLoading(false);
-      // setSnackbarMessage('Failed to upload file.');
-      // setSnackbarSeverity('error');
-      // setSnackbarOpen(true);
+      setSnackbarMessage('Failed to send Searchable Feilds Data.');
+      setSnackbarSeverity('error');
+      setSnackbarOpen(true);
       console.error('Upload error:', err);
     }
   };
 
+  const handleRefresh = async () => {
+    try {
+      setIsLoading(true);
+
+      const jobStatusResponse = await fetcher([`${endpoints.aiSearch.settings.jobStatus}${jobId}`, {}]);
+      setJobStatus(jobStatusResponse);
+
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      console.error('Upload error:', err);
+    }
+  }
 
   const handleCloseSnackbar = (
     _event?: React.SyntheticEvent | Event,
@@ -356,6 +433,29 @@ export function GetStartedPage() {
             handleChange={handleChange}
             handleContinue={handleContinue}
           />
+        )}
+
+        {activeStep === 2 && (
+          <Paper sx={{ p: 3, maxWidth: 600, mx: 'auto' }}>
+            <Box display="flex" justifyContent="flex-end" mb={2} mr={4}>
+              <Button
+                variant="contained"
+                disabled={!file}
+                onClick={handleRefresh}
+              >
+                Refresh
+              </Button>
+            </Box>
+
+            <Stack spacing={2}>
+              <InfoRow label="Job Name :" value="Indexing Job" />
+              <InfoRow label="Index Name :" value={jobStatus.OpenSearchIndexName} />
+              <InfoRow label="Status :" value={jobStatus.Status} />
+              <InfoRow label="Records :" value={jobStatus.Records ?? 0} />
+              <InfoRow label="Created At :" value={jobStatus.CreatedAt} />
+              <InfoRow label="Updated At :" value={jobStatus.UpdatedAt} />
+            </Stack>
+          </Paper>
         )}
       </Grid>
 

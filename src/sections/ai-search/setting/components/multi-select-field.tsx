@@ -31,7 +31,25 @@ export function MultiSelectField({
                 <Typography fontWeight="bold" mr={1}>
                     {label}
                 </Typography>
-                <Tooltip title={tooltipText} arrow>
+                <Tooltip
+                    title={tooltipText}
+                    arrow
+                    componentsProps={{
+                        tooltip: {
+                            sx: {
+                                backgroundColor: '#f5f5f5',
+                                color: '#000',
+                                fontSize: 13,
+                                border: '1px solid #ccc',
+                            },
+                        },
+                        arrow: {
+                            sx: {
+                                color: '#f5f5f5',
+                            },
+                        },
+                    }}
+                >
                     <IconButton size="small">
                         <Iconify icon="mdi:information-outline" width={18} />
                     </IconButton>

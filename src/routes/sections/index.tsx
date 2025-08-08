@@ -11,8 +11,11 @@ import AdminProtectedRoute from 'src/auth/guard/admin-auth-guard';
 // Overview
 const Overview = lazy(() => import('src/pages/ai-search/overview'));
 
+// Preview 
+const Preview = lazy(() => import('src/pages/ai-search/preview'));
+
 // GetStarted
-const GetStarted = lazy(() => import('src/pages/ai-search/get-started'));
+const SettingPage = lazy(() => import('src/pages/ai-search/setting'));
 
 // ----------------------------------------------------------------------
 
@@ -44,8 +47,12 @@ export function Router() {
           element: <Overview />,
         },
         {
-          path: 'getstarted',
-          element: <GetStarted />,
+          path: 'preview',
+          element: <Preview />,
+        },
+        {
+          path: 'setting',
+          element: <SettingPage />,
         } 
       ],
     },

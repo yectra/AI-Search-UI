@@ -98,10 +98,11 @@ export const deleteFetcher = async (args: string | [string, AxiosRequestConfig])
 
 export const endpoints = {
   aiSearch: {
-    getStarted: {
+    settings: {
       upload: 'https://k2rnzovi07.execute-api.us-east-1.amazonaws.com/Prod/api/fileUpload',
       getAttributes: 'https://k2rnzovi07.execute-api.us-east-1.amazonaws.com/Prod/api/getAttributes?',
-      searchableFields: 'https://k2rnzovi07.execute-api.us-east-1.amazonaws.com/Prod/api/searchableFields'
+      searchableFields: 'https://k2rnzovi07.execute-api.us-east-1.amazonaws.com/Prod/api/searchableFields',
+      jobStatus:'https://k2rnzovi07.execute-api.us-east-1.amazonaws.com/Prod/api/jobStatus/'
     }
   },
 };

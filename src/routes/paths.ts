@@ -81,8 +81,11 @@ export const paths = {
     overview: {
       root: `${ROOTS.AISEARCH}/overview`,
     },
-    getstarted: {
-      root: `${ROOTS.AISEARCH}/getstarted`,
+    preview: {
+      root: `${ROOTS.AISEARCH}/preview`,
+    },
+    setting: {
+      root: `${ROOTS.AISEARCH}/setting`,
     }
   },
 };
